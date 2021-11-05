@@ -27,30 +27,34 @@ class HashPair{
 		this->value = value;
 	}
 
-	~HashPair(){
+	void print_value(){
+		cout << value;
+	}
+
+	/*~HashPair(){
 		delete this->key;
 		delete this->value;
-	}
+	}*/
 };
 
 template<typename K, typename T>
 class HashTable{
 	private:
-		int size;
+		int num_buckts;
 		list<HashPair<K,T>> * table;
-		int h(K key){
+		int hF(K key){
 			hash<K> khash;
-			return (khash(key) * 3) % size;
+			return (khash(key) * 3) % num_buckts;
 		}
 
 	public:
 		
-		HashTable(int num_buckts){
-			this->size = num_buckts;
-			table = new list<HashPair<K,T>>[size];
+		HashTable(int num_buckts = 10){
+			this->num_buckts = num_buckts;
+			table = new list<HashPair<K,T>>[num_buckts];
 		}
 
-		~HashTable(){
+		/*~HashTable(){
 			for (int i = 0; i < this->size; i++){
 				for (auto hPair : table){
 					~hPair;
@@ -58,13 +62,11 @@ class HashTable{
 			}
 			delete this->size;
 			delete this->table;
-		}
+		}*/
 
 		void clear(){
-			for (int i = 0; i < this->size; i++){
-				for (auto hPair : table){
-					~hPair;
-				}
+			for (int i = 0; i < this->num_buckts; i++){
+				table[i].clear();
 			}
 		}
 
@@ -72,8 +74,25 @@ class HashTable{
 
 		}
 
-		T get (K key){
+		bool put(K key, T dato){
+			int posicion = hF(key);
+			table[posicion].push_back(HashPair<K,T>(key, dato));
+			return true;
+		}
 
+		T get(K key){
+			return table[hF(key)].back().value;
+		}
+
+		void print(){
+			for(int i = 0; i < num_buckts; i++){
+				cout << "i: " << i;
+				for(auto dato: table[i]){
+					cout << "-->";
+					dato.print_value();
+				}
+				cout << endl;
+			}
 		}
 
 		T get_or_default(K key, T default_value){
@@ -81,14 +100,6 @@ class HashTable{
 		}
 
 		bool is_empty(){
-
-		}
-
-		std::vector<K> keys(){
-
-		}
-
-		bool put (K key, Y values){
 
 		}
 
@@ -100,32 +111,7 @@ class HashTable{
 
 		}
 
-		int size(){
-
-		}
-
 		bool operator ==(const HashTable<K,T>& other){
 
-		}
-
-
-
-		bool put(K key, T dato){
-			int posicion = h(key);
-			table[posicion] = HashPair<K,T>(key, dato);
-			return true;
-		}
-
-		T get(K key){
-			return table[h(key)].value;
-		}
-
-		void print(){
-			for(int i = 0; i < size; i++){
-				cout << "i: " << i;
-				cout << " k: " << table[i].key;
-				cout << " --> " << table[i].value;
-				cout << endl;
-			}
 		}
 };

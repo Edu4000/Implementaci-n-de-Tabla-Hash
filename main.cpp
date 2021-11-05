@@ -1,8 +1,7 @@
 #include <iostream>
 #include <list>
 #include <functional>
-//#include "hashT.h"
-#include "hashTv3.h"
+#include "hashtable.h"
 
 using namespace std;
 
@@ -25,10 +24,9 @@ int main(){
 	cout << tabla.get(1191) << endl;
 	cout << tabla.get(500) << endl;
 
-	HashTable<string, int> eternals(10);
-	eternals.put("Thena", 7000);
-	eternals.put("Kingo", 6500);
-	eternals.put("Ikaris", 6250);
+	tabla.clear();
+	tabla.print();
 
-	eternals.print();
+	list<int>* lista = new list<int>[10];
+	lista->push_back(10);
 }
