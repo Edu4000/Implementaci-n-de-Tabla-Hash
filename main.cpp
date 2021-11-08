@@ -1,36 +1,36 @@
 #include <iostream>
+#include <fstream> // leer el archivo
+#include <sstream>// tokenizar el string 
+#include <vector>
+#include <string>
+#include <unordered_map>
 #include <list>
-#include <functional>
 #include "hashtable.h"
 
 using namespace std;
 
-int main(){
-	/*cout << "Hello World\n";
-	hash<string> hstring;
-	cout << hstring("L009966007") << endl;
+void cargaWuhanFasta(vector<string> & datos){
+  string archivo = "wuhan.fasta";
+  ifstream lector(archivo);
+  if(lector.fail()){
+    cout << "error ";
+    return;
+  }
 
-	int llaves[] = {9818, 9342, 5812, 5607, 2388, 9035, 6575, 8363, 6610, 191};
-	HashTable<int,int> tabla(11);
-	hash<int> hint;
-	
-	for(int i =0; i < 10; i++){
-		tabla.put(hint(llaves[i]), llaves[i]);
-	}
+  string linea;
+  getline(lector, linea); // salta el primer renglón.
+  while( getline(lector, linea)){
+      datos.push_back(linea);
+  }
+  lector.close();
+}
 
-	tabla.put(1191, 500);
-	tabla.print();
+int main() {
 
-	cout << tabla.get(1191) << endl;
-	cout << tabla.get(500) << endl;
-
-	tabla.clear();
-	tabla.print();
-
-	list<int>* lista = new list<int>[10];
-	lista->push_back(10);*/
-
-	HashTable<double, bool> a(25);
+	/* 
+	*	Llamado de funciones y ejemplos de Practica 5
+	*/
+    HashTable<double, bool> a(25);
     HashTable<string, int> b(7);
     b.put("one", 1);
     b.put("two", 2);
@@ -68,10 +68,105 @@ int main(){
     c.put(1'000, "M");
 	c.print();
 
-    HashTable<int, int> d(1'000);
+    /*HashTable<int, int> d(1'000);
     for (int i = 0; i < 100'000; ++i) {
         d.put(i, i * 2 - 1);
     }
-	d.print();
+	d.print();*/
 
+	
+	int size = 10;
+	HashTable<string, int> ba(7); // O(1)
+	HashTable<string, int> aa(7); // O(1)
+	// O(1)
+	ba.put("hola", 10);
+	ba.put("hola", 11);
+	ba.put("adios", 20);
+	aa.put("hola", 10);
+	aa.put("hola", 11);
+	aa.put("adios", 20);
+
+	cout << (ba == aa) << endl;
+
+	b.print(); // O(n)
+	cout << "\nClearing hash table" << endl;
+	b.clear(); // O(n)
+	b.print(); // O(n^2)
+	cout << endl;
+
+
+	/* 
+	*	Laboratorio de ADN
+	*/
+	unordered_map <int, int> mapa;
+	mapa[10] = 100;
+	mapa[20] = 200;
+	for(auto dato : mapa){
+		cout << dato.first << " " << dato.second << endl;
+	}
+
+	cout << mapa[10] << endl;
+	cout << "Hello World!\n";
+	vector<string> genoma;
+
+	cargaWuhanFasta(genoma);
+	cout << genoma.size() << endl;
+
+	HashTable<char, int> wuhan_bases(5);
+	hash<char> khash;
+	cout << "A: " << khash('A') << endl;
+	cout << "C: " << khash('C') << endl;
+	cout << "G: " << khash('G') << endl;
+	cout << "T: " << khash('T') << endl;
+
+
+	for (int i = 0; i < genoma.size(); i++){
+		for (char ch : genoma[i]){
+			wuhan_bases.put(ch,1);
+		}
+	}
+	wuhan_bases.print_num();
+	
+
+	hash<string> shash;
+	string bases [] = {"A", "C", "G", "T"};
+	string aux;
+	for (string prim : bases) {
+		aux.append(prim);
+		for (string seg : bases) {
+			aux.append(seg);
+			for (string ter : bases) {
+				aux.append(ter);
+				cout << aux << ": " << shash(aux) << endl;
+				aux.pop_back();
+			}
+			aux.pop_back();
+		}
+		aux.pop_back();
+	}
+	cout << endl;
+	HashTable<string, int> wuhan_codones(64);
+	
+	/*
+	Laboratorio del Genoma del SARS-COV2 & HashTable
+	Ejercicio 1:
+	Usando una tabla hash crea un contador del total de número de bases de toda la secuencia. ¿Recuerdas cuáles son los nucleótidos en un genoma?
+
+	Ejercicio 2:
+
+	¿Recuerdas el dogma central de la biología molecular?
+	Revisa los conceptos:
+	https://www.nature.com/scitable/topicpage/translation-dna-to-mrna-to-protein-393/#:~:text=During%20transcription%2C%20the%20enzyme%20RNA,encoded%20by%20the%20original%20gene.
+
+	Revisa una transcripción -> traducción:
+	http://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
+
+	Utilizando una tabla hash:
+	1. Llena la tabla con los codones (o tripletes permitidos SIN repetidos). Cada codón es una llave en una tabla hash. Imprime todas las llaves de la tabla.
+	2. Encuentra todas las repeticiones de cada codón utilizando la tabla hash.
+	3. Imprime el contenido de toda la tabla.
+	4. Borra los codones que no tengan más de 100 repeticiones.
+	5. Imprime la tabla.
+	6. Imprime las repeticiones de todos los codones que inicien con A.
+	*/
 }
