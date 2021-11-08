@@ -5,7 +5,7 @@
  * Fecha: 05-Nov-2021
  * Autores:
  *           A01653868 Eduardo Angeles Guerrero
- *           A01777771 Loki Laufeyson
+ *           A01654419 Luis Ernesto Ladrón de Guevara González
  *----------------------------------------------------------*/
 
 #include <iostream>
@@ -19,22 +19,26 @@ class HashPair{
 		K key;
 		T value;
 
-	HashPair(){
-	}
-	
-	HashPair(K key, T value){
-		this->key = key;
-		this->value = value;
-	}
+		HashPair(){
+		}
+		
+		HashPair(K key, T value){
+			this->key = key;
+			this->value = value;
+		}
 
-	void print_value(){
-		cout << value;
-	}
+		~HashPair(){
+			delete &key;
+			delete &value;
+		}
 
-	/*~HashPair(){
-		delete this->key;
-		delete this->value;
-	}*/
+		void print_value(){
+			cout << "[" << key << "," << value << "]";;
+		}
+
+		bool operator ==(const HashPair<K,T>& other){
+			return (other.key == this->key) && (other.value == this->value);
+		}
 };
 
 template<typename K, typename T>
@@ -44,7 +48,7 @@ class HashTable{
 		list<HashPair<K,T>> * table;
 		int hF(K key){
 			hash<K> khash;
-			return (khash(key) * 3) % num_buckts;
+			return (khash(key)) % num_buckts;
 		}
 
 	public:
@@ -57,11 +61,11 @@ class HashTable{
 		/*~HashTable(){
 			for (int i = 0; i < this->size; i++){
 				for (auto hPair : table){
-					~hPair;
+					//~hPair;
 				}
 			}
-			delete this->size;
-			delete this->table;
+			delete &num_buckts;
+			delete &table;
 		}*/
 
 		void clear(){
@@ -112,6 +116,18 @@ class HashTable{
 		}
 
 		bool operator ==(const HashTable<K,T>& other){
-
+			if (this->num_buckts = other.num_buckts){
+				for(int i = 0; i < num_buckts; i++){
+					if (this->table[i].size() = other.table[i].size()){
+						if (!(this->table[i] == other.table[i])){
+							return false;
+						}
+					}else{
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
 		}
 };
