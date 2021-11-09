@@ -68,6 +68,7 @@ class HashTable{
 			this->num_buckets = num_buckets;
 			table = new list<HashPair<K,T>*>[num_buckets];
 		}
+		
 		// O(1)
 		~HashTable(){ 
 			delete &num_buckets;
@@ -91,13 +92,38 @@ class HashTable{
 			return false;
 		}
 
+		// O(n)
 		T get(K key){
-
+			HashPair<K,T>* aux = new HashPair<K,T> ();
+			int index = hF(key);
+			try
+			{
+				for (int i = 0; i < table[index].size(); i++){
+					aux = table[index].front();
+					table[index].pop_front();
+					if (aux->key == key){
+						return aux->value;
+					}
+				}
+			}
+			catch(const std::invalid_argument& e)
+			{
+				std::cerr << e.what() << '\n';
+			}
 		}
 
-		// TODO
+		// O(n)
 		T get_or_default(K key, T default_value){
-
+			HashPair<K,T>* aux = new HashPair<K,T> ();
+			int index = hF(key);
+			for (int i = 0; i < table[index].size(); i++){
+				aux = table[index].front();
+				table[index].pop_front();
+				if (aux->key == key){
+					return aux->value;
+				}
+			}
+			return default_value;
 		}
 		
 		// O(n)
