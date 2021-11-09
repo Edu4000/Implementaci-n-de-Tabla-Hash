@@ -63,23 +63,26 @@ class HashTable{
 	public:
 		list<HashPair<K,T>*> * table;
 		
-		HashTable(int num_buckets = 10){ // O(1)
+		// O(1)
+		HashTable(int num_buckets = 10){ 
 			this->num_buckets = num_buckets;
 			table = new list<HashPair<K,T>*>[num_buckets];
 		}
-
-		~HashTable(){ // O(1)
+		// O(1)
+		~HashTable(){ 
 			delete &num_buckets;
 			delete table;
 		}
 
-		void clear(){ // O(n)
+		// O(n)
+		void clear(){ 
 			for (int i = 0; i < this->num_buckets; i++){
 				table[i].clear();
 			}
 		}
 
-		bool contains_keys(K key){ // O(n)
+		// O(n)
+		bool contains_keys(K key){ 
 			for (int i = 0; i < num_buckets; i++){
 				if (table[i].front() == key){
 					return true;
@@ -96,8 +99,9 @@ class HashTable{
 		T get_or_default(K key, T default_value){
 
 		}
-
-		bool is_empty(){ // O(n)
+		
+		// O(n)
+		bool is_empty(){ 
 			for (int i = 0; i < num_buckets; i++){
 				if(table[i].size() > 0){
 					return false;
@@ -106,19 +110,20 @@ class HashTable{
 			return true;
 		}
 
-		vector<K> keys (){ // O(n^2)
+		// O(n^2)
+		vector<K> keys (){ 
 			vector<K> k_values = vector<K>();
 			for (int i = 0; i < num_buckets; i++){
 				for(auto dato: table[i]){
 					k_values.push_back(dato->key);
 				}
 			}
-
 			sort(k_values.begin(), k_values.end());
 			return k_values;
 		}
 
-		bool put(K key, T dato){ // O(1)
+		// O(1)
+		bool put(K key, T dato){ 
 			int posicion = hF(key);
 			table[posicion].push_back(new HashPair<K,T>(key, dato));
 			return true;
@@ -128,35 +133,55 @@ class HashTable{
 
 		}
 
-		bool remove (K key){
+		// O(n)
+		bool remove (K key){ 
 			HashPair<K,T>* aux = new HashPair<K,T> ();
 			int index = hF(key);
 			for (int i = 0; i < table[index].size(); i++){
 				aux = table[index].front();
+				table[index].pop_front();
 				if (aux->key == key){
 					return true;
+				} else {
+					table[index].push_back(aux);
 				}
 			}
 			return false;
 		}
 
-		bool remove_all (K key){
+		// O(1)
+		bool remove_all (K key){ 
 			HashPair<K,T>* aux = new HashPair<K,T> ();
 			int index = hF(key);
 			table[index].clear();
 			return true;
 		}
 
-		int size(){
+		// O(1)
+		int size(){ 
 			return this->num_buckets;
 		}
 
-		bool operator ==(const HashTable<K,T>& other){
+		// O(n^2)
+		bool operator ==(const HashTable<K,T>& other){ 
+			HashPair<K,T>* aux1 = new HashPair<K,T>();
+			HashPair<K,T>* aux2 = new HashPair<K,T>();
+
 			if (this->num_buckets == other.num_buckets){
 				for(int i = 0; i < num_buckets; i++){
 					if (this->table[i].size() == other.table[i].size()){
-						if (!(this->table[i] == other.table[i])){
-							return false;
+						for (int j = 0; j < table[i].size(); j++){
+							aux1 = this->table[i].front();
+							this->table[i].pop_front();
+							this->table[i].push_back(aux1);
+
+							aux2 = other.table[i].front();
+							other.table[i].pop_front();
+							other.table[i].push_back(aux2);
+
+							if (aux1->key != aux2->key || aux1->value != aux2->value){
+								return false;
+							}
 						}
 					}else{
 						return false;
@@ -167,7 +192,8 @@ class HashTable{
 			return false;
 		}
 
-		void print(){
+		// O(n^2)
+		void print(){ 
 			for(int i = 0; i < num_buckets; i++){
 				cout << "i: " << i;
 				for(auto dato: table[i]){
@@ -178,7 +204,8 @@ class HashTable{
 			}
 		}
 
-		void print_key(){
+		// O(n^2)
+		void print_key(){ 
 			for(int i = 0; i < num_buckets; i++){
 				cout << "i: " << i;
 				if (table[i].size() > 0) {
@@ -189,7 +216,8 @@ class HashTable{
 			}
 		}
 
-		void print_value(){
+		// O(n^2)
+		void print_value(){ 
 			for(int i = 0; i < num_buckets; i++){
 				cout << "i: " << i;
 				if (table[i].size() > 0) {
@@ -200,7 +228,8 @@ class HashTable{
 			}
 		}
 
-		void print_value(int lower_bound, int upper_bound){
+		// O(n^2)
+		void print_value(int lower_bound, int upper_bound){ 
 			for(int i = lower_bound; i < upper_bound; i++){
 				cout << "i: " << i;
 				if (table[i].size() > 0) {
