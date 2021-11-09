@@ -149,14 +149,30 @@ class HashTable{
 		}
 
 		// O(1)
-		bool put(K key, T dato){ 
+		bool put(K key, T value){ 
 			int posicion = hF(key);
-			table[posicion].push_back(new HashPair<K,T>(key, dato));
-			return true;
+			if (table[posicion].size() > 0) {
+				for(auto dato: table[posicion]){
+					if (dato->key == key){
+						dato->value = value;
+						return false;
+					}
+				}
+				table[posicion].push_back(new HashPair<K,T>(key, value));
+				return true;
+			} else {
+				table[posicion].push_back(new HashPair<K,T>(key, value));
+				return true;
+			}
 		}
 
+		// O(n)
 		void put_all (const HashTable<K,T>& other){
-
+			for(int i = 0; i < other.num_buckets; i++){
+				for(auto dato : other.table[i]){
+					this->put(dato->key, dato->value);
+				}
+			}
 		}
 
 		// O(n)
