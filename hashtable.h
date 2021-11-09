@@ -46,7 +46,6 @@ template<typename K, typename T>
 class HashTable{
 	private:
 		int num_buckets;
-		list<HashPair<K,T>*> * table;
 		int hF(K key){
 			hash<K> khash;
 			int index = (khash(key)) % num_buckets;
@@ -62,6 +61,7 @@ class HashTable{
 		}
 
 	public:
+		list<HashPair<K,T>*> * table;
 		
 		HashTable(int num_buckets = 10){ // O(1)
 			this->num_buckets = num_buckets;
@@ -129,7 +129,22 @@ class HashTable{
 		}
 
 		bool remove (K key){
+			HashPair<K,T>* aux = new HashPair<K,T> ();
+			int index = hF(key);
+			for (int i = 0; i < table[index].size(); i++){
+				aux = table[index].front();
+				if (aux->key == key){
+					return true;
+				}
+			}
+			return false;
+		}
 
+		bool remove_all (K key){
+			HashPair<K,T>* aux = new HashPair<K,T> ();
+			int index = hF(key);
+			table[index].clear();
+			return true;
 		}
 
 		int size(){
@@ -176,6 +191,17 @@ class HashTable{
 
 		void print_value(){
 			for(int i = 0; i < num_buckets; i++){
+				cout << "i: " << i;
+				if (table[i].size() > 0) {
+					cout << " k: " << table[i].front()->value;
+					cout << " count: " << table[i].size();
+				}
+				cout << endl;
+			}
+		}
+
+		void print_value(int lower_bound, int upper_bound){
+			for(int i = lower_bound; i < upper_bound; i++){
 				cout << "i: " << i;
 				if (table[i].size() > 0) {
 					cout << " k: " << table[i].front()->value;

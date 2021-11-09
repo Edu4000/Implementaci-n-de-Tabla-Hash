@@ -122,6 +122,7 @@ int main() {
 	cout << "Hello World!\n";
 	vector<string> genoma;
 
+	// Cargando los datos del archivo FASTA
 	cargaWuhanFasta(genoma);
 	cout << genoma.size() << endl;
 
@@ -178,6 +179,22 @@ int main() {
 	wuhan_codones.print();
 
 	// Ejercicio 1.4
+	cout << "\nEliminando codones con menos de 100 repeticiones" << endl;
+	for (int i = 0; i < wuhan_codones.size(); i++){
+		// En esta implementación, una key 
+		if (wuhan_codones.table[i].size() < 100) {
+			wuhan_codones.remove_all(i);
+		}
+	}
+
+	// Ejercicio 1.5
+	cout << "\nImprimiendo tabla despues de eliminar codones con menos de 100 repeticiones" << endl;
+	wuhan_codones.print_value();
+
+	// Ejercicio 1.6
+	cout << "\nimprimiendo codones que empiezan con A" << endl;
+	wuhan_codones.print_value(0, 16);
+
 	
 	/*
 	Laboratorio del Genoma del SARS-COV2 & HashTable
