@@ -148,22 +148,11 @@ class HashTable{
 			return k_values;
 		}
 
-		// O(1)
+		// O(n) if replace is TURE and O(1) if replace is FALSE
 		bool put(K key, T value){ 
 			int posicion = hF(key);
-			if (table[posicion].size() > 0) {
-				for(auto dato: table[posicion]){
-					if (dato->key == key){
-						dato->value = value;
-						return false;
-					}
-				}
-				table[posicion].push_back(new HashPair<K,T>(key, value));
-				return true;
-			} else {
-				table[posicion].push_back(new HashPair<K,T>(key, value));
-				return true;
-			}
+			table[posicion].push_back(new HashPair<K,T>(key, value));
+			return true;
 		}
 
 		// O(n)
