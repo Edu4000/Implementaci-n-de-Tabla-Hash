@@ -3,6 +3,7 @@
 #include <sstream>// tokenizar el string 
 #include <vector>
 #include <string>
+#include <math.h>
 #include <unordered_map>
 #include <list>
 #include "hashtable.h"
@@ -23,6 +24,18 @@ void cargaWuhanFasta(vector<string> & datos){
       datos.push_back(linea);
   }
   lector.close();
+}
+
+int index_convert(char letter, int exp){
+	if (letter == 'A') {
+		return 0;
+	} else if (letter == 'C') {
+		return 1 * pow(4,exp);
+	} else if (letter == 'G') {
+		return 2 * pow(4,exp);
+	} else {
+		return 3 * pow(4,exp);
+	}
 }
 
 int main() {
@@ -112,40 +125,59 @@ int main() {
 	cargaWuhanFasta(genoma);
 	cout << genoma.size() << endl;
 
+	// Hash Table de los nucleotidos del FASTA
+	cout << "\nPor analizar archivo FASTA por nucleotidos\n" << endl;
 	HashTable<char, int> wuhan_bases(5);
-	hash<char> khash;
-	cout << "A: " << khash('A') << endl;
-	cout << "C: " << khash('C') << endl;
-	cout << "G: " << khash('G') << endl;
-	cout << "T: " << khash('T') << endl;
-
 
 	for (int i = 0; i < genoma.size(); i++){
 		for (char ch : genoma[i]){
 			wuhan_bases.put(ch,1);
 		}
 	}
-	wuhan_bases.print_num();
+	// Impresión de la cuenta de los nucleotidos
+	wuhan_bases.print_key();
 	
+	// Hash Table de los codones del FASTA
+	cout << "\nPor analizar archivo FASTA por codones" << endl;
 
-	hash<string> shash;
-	string bases [] = {"A", "C", "G", "T"};
+	// Ejercicio 1.1
+	HashTable<int, string> wuhan_codones(64); // O(1)
+	int counter = 0;
+	int index = 0;
+	int exponent = 2;
 	string aux;
-	for (string prim : bases) {
-		aux.append(prim);
-		for (string seg : bases) {
-			aux.append(seg);
-			for (string ter : bases) {
-				aux.append(ter);
-				cout << aux << ": " << shash(aux) << endl;
+	// Complejidad de ejercicio O(n^2)
+	for (int i = 0; i < genoma.size(); i++){ // O(n)
+		for (char ch : genoma[i]){ // O(n)
+			// Usa las letras para encontrar un indice (base 4)
+			index += index_convert(ch, exponent);
+			exponent--;
+			aux.push_back(ch);
+			counter++;
+			if (counter == 3){ // O(1)
+				// Agrega codon a Tabla Hash
+				wuhan_codones.put(index,aux); // O(1)
+				// Reinicia variables auxiliares
+				counter = 0;
+				index = 0;
+				exponent = 2;
+				// Deja el string auxiliar vacio
+				aux.pop_back();
+				aux.pop_back();
 				aux.pop_back();
 			}
-			aux.pop_back();
 		}
-		aux.pop_back();
 	}
-	cout << endl;
-	HashTable<string, int> wuhan_codones(64);
+
+	// Ejercicio 1.2
+	cout << "\nRecuento de codones" << endl;
+	wuhan_codones.print_value();
+
+	// Ejercicio 1.3
+	cout << "\nImpresion de tabla hash completa" << endl;
+	wuhan_codones.print();
+
+	// Ejercicio 1.4
 	
 	/*
 	Laboratorio del Genoma del SARS-COV2 & HashTable

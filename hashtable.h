@@ -49,7 +49,16 @@ class HashTable{
 		list<HashPair<K,T>*> * table;
 		int hF(K key){
 			hash<K> khash;
-			return (khash(key)) % num_buckets;
+			int index = (khash(key)) % num_buckets;
+			if (num_buckets > 80) {
+				while (table[index].size() > 0){
+					if (table[index].front()->key == key){
+						return index;
+					}
+					index++;
+				}
+			}
+			return index;
 		}
 
 	public:
@@ -72,7 +81,7 @@ class HashTable{
 
 		bool contains_keys(K key){ // O(n)
 			for (int i = 0; i < num_buckets; i++){
-				if (table[i].fornt() == key){
+				if (table[i].front() == key){
 					return true;
 				}
 			}
@@ -154,11 +163,22 @@ class HashTable{
 			}
 		}
 
-		void print_num(){
+		void print_key(){
 			for(int i = 0; i < num_buckets; i++){
 				cout << "i: " << i;
 				if (table[i].size() > 0) {
 					cout << " k: " << table[i].front()->key;
+					cout << " count: " << table[i].size();
+				}
+				cout << endl;
+			}
+		}
+
+		void print_value(){
+			for(int i = 0; i < num_buckets; i++){
+				cout << "i: " << i;
+				if (table[i].size() > 0) {
+					cout << " k: " << table[i].front()->value;
 					cout << " count: " << table[i].size();
 				}
 				cout << endl;
