@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream> // leer el archivo
-#include <sstream>// tokenizar el string 
+#include <sstream>// tokenizar el string
 #include <vector>
 #include <string>
 #include <math.h>
@@ -40,7 +40,7 @@ int index_convert(char letter, int exp){
 
 int main() {
 
-	/* 
+	/*
 	*	Llamado de funciones y ejemplos de Practica 5
 	*/
     HashTable<double, bool> a(25);
@@ -79,33 +79,7 @@ int main() {
     c.put(100, "C");
     c.put(500, "D");
     c.put(1'000, "M");
-	c.print();
-
-    /*HashTable<int, int> d(1'000);
-    for (int i = 0; i < 100'000; ++i) {
-        d.put(i, i * 2 - 1);
-    }
-	d.print();*/
-
-	
-	int size = 10;
-	HashTable<string, int> ba(7); // O(1)
-	HashTable<string, int> aa(7); // O(1)
-	// O(1)
-	ba.put("hola", 10);
-	ba.put("hola", 11);
-	ba.put("adios", 20);
-	aa.put("hola", 10);
-	aa.put("hola", 11);
-	aa.put("adios", 20);
-
-	cout << (ba == aa) << endl;
-
-	b.print(); // O(n)
-	cout << "\nClearing hash table" << endl;
-	b.clear(); // O(n)
-	b.print(); // O(n^2)
-	cout << endl;
+    c.print();
 
 
 	/*
@@ -130,15 +104,6 @@ int main() {
 	5. Imprime la tabla.
 	6. Imprime las repeticiones de todos los codones que inicien con A.
 	*/
-	unordered_map <int, int> mapa;
-	mapa[10] = 100;
-	mapa[20] = 200;
-	for(auto dato : mapa){
-		cout << dato.first << " " << dato.second << endl;
-	}
-
-	cout << mapa[10] << endl;
-	cout << "Hello World!\n";
 	vector<string> genoma;
 
 	// Cargando los datos del archivo FASTA
@@ -156,7 +121,7 @@ int main() {
 	}
 	// Impresión de la cuenta de los nucleotidos
 	wuhan_bases.print_key();
-	
+
 	// Hash Table de los codones del FASTA
 	cout << "\nPor analizar archivo FASTA por codones" << endl;
 
@@ -200,7 +165,7 @@ int main() {
 	// Ejercicio 1.4
 	cout << "\nEliminando codones con menos de 100 repeticiones" << endl;
 	for (int i = 0; i < wuhan_codones.size(); i++){
-		// En esta implementación, una key 
+		// En esta implementación, una key
 		if (wuhan_codones.table[i].size() < 100) {
 			wuhan_codones.remove_all(i);
 		}

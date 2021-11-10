@@ -3,7 +3,10 @@
 #include <sstream>// tokenizar el string
 #include <vector>
 #include <string>
+#include <math.h>
 #include <unordered_map>
+#include <list>
+#include "hashtable.h"
 
 using namespace std;
 
@@ -27,11 +30,49 @@ void printMap(unordered_map <T, K> & map)
 {
 	for (auto dato : map)
 	{
-		cout << dato.first << "->" << dato.second << endl;
+		cout << "key " << dato.first << "->" << "count " << dato.second << endl;
 	}
 }
 
 int main() {
+	HashTable<double, bool> a(25);
+	HashTable<string, int> b(7);
+	b.put("one", 1);
+        b.put("two", 2);
+        b.put("three", 3);
+        b.put("four", 4);
+        b.put("five", 5);
+        b.put("six", 6);
+        b.put("seven", 7);
+    	b.print();
+
+        HashTable<int, string> c(99);
+        c.put(1, "I");
+        c.put(2, "II");
+        c.put(3, "III");
+        c.put(4, "IV");
+        c.put(5, "V");
+        c.put(6, "VI");
+        c.put(7, "VII");
+        c.put(8, "VIII");
+        c.put(9, "IX");
+        c.put(10, "X");
+        c.put(11, "XI");
+        c.put(12, "XII");
+        c.put(13, "XIII");
+        c.put(14, "XIV");
+        c.put(15, "XV");
+        c.put(16, "XVI");
+        c.put(17, "XVII");
+        c.put(18, "XVIII");
+        c.put(19, "XIX");
+        c.put(20, "XX");
+        c.put(50, "L");
+        c.put(100, "C");
+        c.put(500, "D");
+        c.put(1'000, "M");
+        c.print();
+	cout << "\nPara analizar archivo FASTA por nucleotidos" << endl;
 
 	string bases [] = {"A", "C", "G", "T"};
 	string aux;
@@ -91,7 +132,7 @@ int main() {
 	for (auto dato : codones){
 		if (dato.second > 100)
 		{
-			cout << dato.first << " " << dato.second << endl;
+			cout << "key " << dato.first << "->" << "count " << dato.second << endl;
 		}
 	}
 
@@ -99,7 +140,7 @@ int main() {
 	for (auto dato : codones){
 		if (dato.first[0] == 'A')
 		{
-			cout << dato.first << " " << dato.second << endl;
+			cout << "key " << dato.first << "->" << "count " << dato.second << endl;
 		}
 	}
 	/*

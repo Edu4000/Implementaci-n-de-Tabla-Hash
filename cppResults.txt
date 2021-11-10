@@ -1,0 +1,244 @@
+i: 0-->[two,2]
+i: 1
+i: 2
+i: 3-->[five,5]
+i: 4-->[three,3]-->[four,4]-->[six,6]-->[seven,7]
+i: 5
+i: 6-->[one,1]
+i: 0
+i: 1-->[1,I]
+i: 2-->[2,II]
+i: 3-->[3,III]
+i: 4-->[4,IV]
+i: 5-->[5,V]
+i: 6-->[6,VI]
+i: 7-->[7,VII]
+i: 8-->[8,VIII]
+i: 9-->[9,IX]
+i: 10-->[10,X]
+i: 11-->[11,XI]
+i: 12-->[12,XII]
+i: 13-->[13,XIII]
+i: 14-->[14,XIV]
+i: 15-->[15,XV]
+i: 16-->[16,XVI]
+i: 17-->[17,XVII]
+i: 18-->[18,XVIII]
+i: 19-->[19,XIX]
+i: 20-->[20,XX]
+i: 21-->[100,C]
+i: 22-->[500,D]
+i: 23-->[1000,M]
+i: 24
+i: 25
+i: 26
+i: 27
+i: 28
+i: 29
+i: 30
+i: 31
+i: 32
+i: 33
+i: 34
+i: 35
+i: 36
+i: 37
+i: 38
+i: 39
+i: 40
+i: 41
+i: 42
+i: 43
+i: 44
+i: 45
+i: 46
+i: 47
+i: 48
+i: 49
+i: 50-->[50,L]
+i: 51
+i: 52
+i: 53
+i: 54
+i: 55
+i: 56
+i: 57
+i: 58
+i: 59
+i: 60
+i: 61
+i: 62
+i: 63
+i: 64
+i: 65
+i: 66
+i: 67
+i: 68
+i: 69
+i: 70
+i: 71
+i: 72
+i: 73
+i: 74
+i: 75
+i: 76
+i: 77
+i: 78
+i: 79
+i: 80
+i: 81
+i: 82
+i: 83
+i: 84
+i: 85
+i: 86
+i: 87
+i: 88
+i: 89
+i: 90
+i: 91
+i: 92
+i: 93
+i: 94
+i: 95
+i: 96
+i: 97
+i: 98
+
+Para analizar archivo FASTA por nucleotidos
+key T->count 9594
+key G->count 5863
+key C->count 5492
+key A->count 8954
+
+Imprimir toda la tabla
+key TTT->count 383
+key TTG->count 178
+key CGT->count 54
+key CGA->count 31
+key CGG->count 33
+key CGC->count 40
+key CTC->count 78
+key ATG->count 117
+key CAT->count 172
+key CCT->count 107
+key CTG->count 80
+key GAA->count 186
+key CCC->count 42
+key TAA->count 342
+key CAA->count 233
+key GGG->count 49
+key ATC->count 112
+key AAA->count 303
+key ACA->count 249
+key ATT->count 208
+key AGC->count 141
+key AAC->count 212
+key TAG->count 128
+key CAC->count 160
+key ACC->count 150
+key CTT->count 208
+key TGC->count 268
+key ATA->count 116
+key AAT->count 260
+key CCG->count 28
+key AAG->count 110
+key GAG->count 84
+key ACG->count 60
+key CTA->count 110
+key TTA->count 232
+key ACT->count 220
+key AGA->count 277
+key CCA->count 115
+key AGT->count 197
+key CAG->count 92
+key TGG->count 263
+key AGG->count 123
+key GAC->count 123
+key GAT->count 167
+key TCT->count 190
+key GCA->count 116
+key GCG->count 22
+key GGA->count 112
+key GGC->count 84
+key GTA->count 121
+key GGT->count 149
+key TTC->count 210
+key GTC->count 101
+key GTG->count 93
+key GTT->count 233
+key TAC->count 227
+key TAT->count 278
+key GCC->count 68
+key GCT->count 169
+key TCA->count 173
+key TCG->count 34
+key TGT->count 367
+key TCC->count 75
+key TGA->count 304
+
+Imprimir tabla con codones de mas de 100 repeticiones
+key TTT->count 383
+key TTG->count 178
+key ATG->count 117
+key CAT->count 172
+key CCT->count 107
+key GAA->count 186
+key TAA->count 342
+key CAA->count 233
+key ATC->count 112
+key AAA->count 303
+key ACA->count 249
+key ATT->count 208
+key AGC->count 141
+key AAC->count 212
+key TAG->count 128
+key CAC->count 160
+key ACC->count 150
+key CTT->count 208
+key TGC->count 268
+key ATA->count 116
+key AAT->count 260
+key AAG->count 110
+key CTA->count 110
+key TTA->count 232
+key ACT->count 220
+key AGA->count 277
+key CCA->count 115
+key AGT->count 197
+key TGG->count 263
+key AGG->count 123
+key GAC->count 123
+key GAT->count 167
+key TCT->count 190
+key GCA->count 116
+key GGA->count 112
+key GTA->count 121
+key GGT->count 149
+key TTC->count 210
+key GTC->count 101
+key GTT->count 233
+key TAC->count 227
+key TAT->count 278
+key GCT->count 169
+key TCA->count 173
+key TGT->count 367
+key TGA->count 304
+
+Tabla con las A
+key ATG->count 117
+key ATC->count 112
+key AAA->count 303
+key ACA->count 249
+key ATT->count 208
+key AGC->count 141
+key AAC->count 212
+key ACC->count 150
+key ATA->count 116
+key AAT->count 260
+key AAG->count 110
+key ACG->count 60
+key ACT->count 220
+key AGA->count 277
+key AGT->count 197
+key AGG->count 123
