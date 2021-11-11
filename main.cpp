@@ -116,7 +116,7 @@ int main() {
 
 	for (int i = 0; i < genoma.size(); i++){
 		for (char ch : genoma[i]){
-			wuhan_bases.put(ch,1);
+			wuhan_bases.put_add(ch,1);
 		}
 	}
 	// Impresión de la cuenta de los nucleotidos
@@ -141,7 +141,7 @@ int main() {
 			counter++;
 			if (counter == 3){ // O(1)
 				// Agrega codon a Tabla Hash
-				wuhan_codones.put(index,aux); // O(1)
+				wuhan_codones.put_add(index,aux); // O(1)
 				// Reinicia variables auxiliares
 				counter = 0;
 				index = 0;
